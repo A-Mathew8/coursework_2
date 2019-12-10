@@ -10,7 +10,7 @@ agent any
 		steps
 		{
 		 echo 'Building File'
-			sh 'server'
+			sh 
 	
 	}			
 
