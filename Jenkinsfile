@@ -11,7 +11,7 @@ agent any
 		steps
 		{
 		 echo 'Building File'
-			server.sh
+		 sh ./server.js
 		}
 	}
 	
