@@ -1,14 +1,7 @@
 pipeline
 {
 
-agent
-{
-
-	docker
-	{
-	image 'jenkinsci/blueocean'
-	}
-}
+agent any
 
 	
 	stages
@@ -18,7 +11,7 @@ agent
 		steps
 		{
 		 echo 'Building File'
-			sh 'server.js'
+			server.sh
 		}
 	}
 	
