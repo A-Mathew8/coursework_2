@@ -1,7 +1,15 @@
 pipeline
 {
 
-agent any
+agent
+{
+
+	docker
+	{
+	image ' node:6-alpine'
+	}
+}
+
 	
 	stages
 	{
@@ -11,9 +19,8 @@ agent any
 		{
 		 echo 'Building File'
 			sh 'server.js'
-	
-	}			
-
 		}
-	}		
+	}
+	
+	}	
 }
