@@ -1,8 +1,15 @@
 pipeline
+{ 
+
+environment 
+
 {
+	registry = "amathew8/coursework_2
+	registryCredential = 'dockerhub'
+}
+
 
 agent any
-
 	
 	stages
 	{
@@ -10,8 +17,12 @@ agent any
 	{
 		steps
 		{
+		script 
+		{
+
 		 echo 'Building File'
-		 app = docker.build("amathew8/coursework2")
+		 docker.build registry + ":$BUILD_NUMBER"
+		}
 		}
 	}
 	
