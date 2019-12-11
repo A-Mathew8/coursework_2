@@ -1,4 +1,4 @@
-pipeline
+jpipeline
 {
 
 agent any
@@ -11,7 +11,7 @@ agent any
 		steps
 		{
 		 echo 'Building File'
-		 node server.js
+		 app = docker.build("amathew8/coursework2")
 		}
 	}
 	
