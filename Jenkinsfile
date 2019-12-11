@@ -1,4 +1,4 @@
-jpipeline
+pipeline
 {
 
 agent any
