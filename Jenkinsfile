@@ -13,18 +13,38 @@ agent any
 	
 	stages
 	{
-	stage('Build')
-	{
-		steps
+		stage('Build')
 		{
-		script 
-		{
+			steps
+			{
+				script 
+				{
 
-		 echo 'Building File'
-		 docker.build registry + ":$BUILD_NUMBER"
+					echo 'Building File'
+					docker.build registry + ":$BUILD_NUMBER"
+				}
+			}
 		}
-		}
-	}
+		
+		stage('SonarQubeTest')
+		{
+			environment
+			{
+				scannerHome = tool 'SonarQube'
+			}
+			steps
+			{
+				withSonarQubeEnv('sonarqube')
+				{
+					sh "${scannerHome}/bin/sonar-scanner"
+				}
+
+				timeout(time: 10, unit: 'MINUTE')
+				{
+					waitForQualityGate abortPipeline: true
+				}
+			}
+		}	
 	
 	}	
 }
