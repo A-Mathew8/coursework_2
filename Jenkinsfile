@@ -4,7 +4,7 @@ pipeline
 environment 
 
 {
-	registry = "amathew8/coursework_2
+	registry = "amathew8/coursework_2"
 	registryCredential = 'dockerhub'
 }
 
