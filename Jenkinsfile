@@ -44,6 +44,18 @@ agent any
 					waitForQualityGate abortPipeline: true
 				}
 			}
+		}
+		
+		stage('PushingToDocker')
+		{
+			steps
+			{	
+				docker.withRegistry('https://registry.hub.docker.com', 'amathew8')
+				{
+					push("${env.BUILD_NUMBER}")
+					push("latest")
+				}
+			}
 		}	
 	
 	}	
