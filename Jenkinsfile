@@ -6,6 +6,7 @@ environment
 {
 	registry = "amathew8/coursework_2"
 	registryCredential = 'dockerhub'
+	dockerImage = ''
 }
 
 
@@ -21,7 +22,7 @@ agent any
 				{
 
 					echo 'Building File'
-					docker.build registry + ":$BUILD_NUMBER"
+					dockerImage = docker.build registry + ":$BUILD_NUMBER"
 					echo 'Build Successful'
 				}
 			}
@@ -56,10 +57,9 @@ agent any
 				script
 				{
 					echo 'Pushing Image to DockerHub'
-					docker.withRegistry('https://hub.docker.com/repository/docker/amathew8/coursework_2', 'amathew8')
+					docker.withRegistry('', 'amathew8')
 					{
-						app.push("${env.BUILD_NUMBER}")
-						app.push("latest")
+						dockerImage.push()
 					}
 					echo 'Image Pushed Successfully'
 				}
