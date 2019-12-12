@@ -57,7 +57,7 @@ agent any
 				script
 				{
 					echo 'Pushing Image to DockerHub'
-					docker.withRegistry('', 'amathew8')
+					docker.withRegistry('https://hub.docker.com/repository/docker/amathew8/coursework_2', 'amathew8')
 					{
 						dockerImage.push()
 					}
