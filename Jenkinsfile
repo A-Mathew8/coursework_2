@@ -22,6 +22,7 @@ agent any
 
 					echo 'Building File'
 					docker.build registry + ":$BUILD_NUMBER"
+					echo 'Build Successful'
 				}
 			}
 		}
@@ -34,6 +35,7 @@ agent any
 			}
 			steps
 			{
+				echo 'SonarQube Testing'
 				withSonarQubeEnv('SonarQube')
 				{
 					sh "${scannerHome}/bin/sonar-scanner"
@@ -43,6 +45,7 @@ agent any
 				{
 					waitForQualityGate abortPipeline: true
 				}
+				echo 'SonarQube Test Successful'
 			}
 		}
 		
@@ -52,11 +55,13 @@ agent any
 			{
 				script
 				{
-					docker.withRegistry('https://registry.hub.docker.com', 'amathew8')
+					echo 'Pushing Image to DockerHub'
+					docker.withRegistry('https://hub.docker.com/repository/docker/amathew8/coursework_2', 'amathew8')
 					{
 						app.push("${env.BUILD_NUMBER}")
 						app.push("latest")
 					}
+					echo 'Image Pushed Successfully'
 				}
 			}
 		}	
