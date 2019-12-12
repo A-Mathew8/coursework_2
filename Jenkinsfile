@@ -48,13 +48,12 @@ agent any
 		
 		stage('PushingToDocker')
 		{
-			steps
-			{	
-				docker.withRegistry('https://registry.hub.docker.com', 'amathew8')
-				{
-					push("${env.BUILD_NUMBER}")
-					push("latest")
-				}
+				
+			docker.withRegistry('https://registry.hub.docker.com', 'amathew8')
+			{
+				app.push("${env.BUILD_NUMBER}")
+				app.push("latest")
+				
 			}
 		}	
 	
