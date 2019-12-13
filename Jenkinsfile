@@ -66,7 +66,7 @@ agent any
 		{
 			steps
 			{	echo 'Rolling Out Updates'
-				sh 'ssh -t azureuser@13.92.246.71 kubectl set image deployments/server.js 20=amathew8/coursework2:v1
+				sh 'ssh -t azureuser@13.92.246.71 kubectl set image deployments/server.js 20=amathew8/coursework2:v8'
 				echo 'Update Rolled Out'
 			}
 		}
