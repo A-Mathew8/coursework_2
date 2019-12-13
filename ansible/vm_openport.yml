@@ -1,0 +1,40 @@
+- name: Adding Inbound Port
+  hosts: localhost
+  connection: local
+
+  vars:
+    myResourceGroup: ansible
+    myVnet: ansible-node-vnet
+    mySubnet: ansible-node-subnet
+    myPublicIP: ansible-node-publicip
+    myNIC: ansible-node-nic
+    myNetworkSecurityGroup: ansible-node-nsg
+    myVM: ansible-node
+    mySSHkey: ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQD7th9JJ9gnhh998gWZI/x9j0fyclcLYGBvr1SE2pZYW7T9sbsy2xaA28D4rmZKRFL9KMP9OsQBgFspT5T$
+
+
+
+  tasks:
+
+
+  - name: Create Network Security Group that allows SSH
+    azure_rm_securitygroup:
+      resource_group: "{{ myResourceGroup}}"
+      name: "{{ myNetworkSecurityGroup }}"
+      rules:
+        - name: http
+          protocol: Tcp
+          destination_port_range: 80 
+          access: Allow
+          priority: 1011
+          direction: Inbound
+
+  - name: Create virtual network interface card
+    azure_rm_networkinterface:
+      resource_group: "{{ myResourceGroup }}"
+      name: "{{ myNIC }}"
+      virtual_network: "{{ myVnet }}"
+      subnet: "{{ mySubnet }}"
+      public_ip_name: "{{ myPublicIP }}"
+      security_group: "{{ myNetworkSecurityGroup }}"
+
