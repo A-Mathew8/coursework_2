@@ -60,7 +60,17 @@ agent any
 					echo 'Image Pushed Successfully'
 				}
 			}
-		}	
+		}
+		
+		stage('Rolling Update')
+		{
+			steps
+			{	echo 'Rolling Out Updates'
+				sh 'ssh -t azureuser@13.92.246.71 kubectl set image deployments/server.js server.js=amathew8/server.js:v8
+				echo 'Update Rolled Out'
+			}
+		}
+		
 	
 	}	
 }
